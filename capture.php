@@ -19,14 +19,15 @@ header('Content-Type:' . $screen->getImageType()->getMimeType());
 header('Content-Length: ' . filesize($screen->getImageLocation()));
 // $data = readfile($screen->getImageLocation());
 
+$webserver = 'https://api.engineerball.com/football-predict-notify/'
 # Send to LINE Bot API
 lineNotify($screen->getImageLocation());
 
 function lineNotify($data) {
 	$queryData = array(
 		'message' => 'Result',
-		'imageThumbnail' => $data,
-		'imageFullsize' => $data);
+		'imageThumbnail' => $webserver . $data,
+		'imageFullsize' => $webserver . $data);
 	$queryData = http_build_query($queryData,'&','$');
 	$header = array(
 		'http' => array(
